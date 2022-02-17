@@ -10,8 +10,6 @@ Created:	2022-02-16
 ------------------------------------------------------------------------------
 */
 public class Sketch extends PApplet {
-	
-	
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
@@ -28,7 +26,7 @@ public class Sketch extends PApplet {
    */
   public void setup() {
 
-    background(180, 249, 239 );
+    background(104, 143, 212);
   }
 
   /**
@@ -38,9 +36,7 @@ public class Sketch extends PApplet {
 
     //ground
 	  for(int i = 0; i <= 1800; i += 100){
-
       ground(i, 900);
-
     }
 
     //stairs
@@ -53,13 +49,16 @@ public class Sketch extends PApplet {
       }
       row += 1;
     }
-    
-  
+
+    //flag
+    flag(1500, 800);
   }
 
   private void blocks(float cubeX, float cubeY){
 
     //brick outline
+    stroke(0, 0, 0, 0);
+    strokeWeight(1);
     fill(0, 0, 0);
     rect(cubeX, cubeY, 50, 25, 5);
     rect(cubeX+50, cubeY, 50, 25, 5);
@@ -95,18 +94,52 @@ public class Sketch extends PApplet {
 
   private void ground(float groundX, float groundY){
 
-    
+    //dirt
     stroke(0, 0);
     fill(201, 134, 87);
     rect(groundX, groundY, 100, 1000-groundY);
 
+    //grass
     fill(18, 156, 11);
-    arc(groundX+50, groundY, 100, 50, 0, PI);
+    arc(groundX+50, groundY, 100, 100, 0, PI);
 
-    stroke(0, 0, 0, 100);
+    //particles in the ground
+    fill(230, 226, 177);
+    ellipse(groundX+30, groundY+80, 25, 25);
+    ellipse(groundX+55, groundY+105, 5, 5);
+    ellipse(groundX+70, groundY+60, 10, 10);
+    ellipse(groundX+30, groundY+140, 15, 15);
+    ellipse(groundX+80, groundY+160, 20, 20);
+    ellipse(groundX+50, groundY+175, 5, 5);
+
+    //top outline
+    stroke(100, 100, 100, 100);
     strokeWeight(2);
     line(groundX, groundY, groundX+100, groundY);
 
   }
-  // define other methods down here.
+
+  private void flag(float flagX, float flagY){
+
+    //base
+    blocks(flagX, flagY);
+
+    stroke(0, 0, 0, 100);
+    strokeWeight(2);
+
+    //pole
+    fill(186, 255, 179);
+    rect(flagX+40, flagY-700, 20, 700);
+
+    //flag
+    fill(255, 255, 255);
+    triangle(flagX-64, flagY-700, flagX+38, flagY-700, flagX+38, flagY-600);
+
+    //ball on top of flag
+    fill(0, 153, 5);
+    ellipse(flagX+50, flagY-725, 50, 50);
+
+    strokeWeight(0);
+    ellipse(flagX+10, flagY-670, 45, 45);
+  }
 }
